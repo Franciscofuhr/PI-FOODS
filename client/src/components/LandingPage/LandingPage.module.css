@@ -1,0 +1,14 @@
+.background{
+    background-image: url("../../Pictures/cooking.png");
+}
+#img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    position:absolute;
+    z-index: -1;
+  
+}
+.text{
+    display: flex;
+}
