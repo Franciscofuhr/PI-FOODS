@@ -9,8 +9,8 @@ module.exports = (sequelize) => {
         defaulValue: DataTypes.UUIDV4,
         primaryKey: true,
       },
-      name: {
-        type: DataTypes.TEXT,
+      names: {
+        type: DataTypes.ARRAY({ type: DataTypes.TEXT }),
         allowNull: false,
       },
     },

@@ -60,7 +60,6 @@ const Recipes = () => {
               {e}
             </button>
           ))}
-          <button onClick={() => numberPage(5)}>5</button>
           {currentPage}
           <button onClick={nextHandler}>Next Page</button>
         </span>

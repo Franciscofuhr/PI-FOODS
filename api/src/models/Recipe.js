@@ -24,12 +24,20 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
         allowNull: true,
       },
+      image: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+      },
       analyzedInstructions: {
         // ES UN ARRAY QUE ADENTRO TIENE UN OBJETO CON UNA PROPIEDAD STEPS(array) EN DONDE
         // que muestran los STEPS,cada STEPS es un objeto con las propiedades number,step(instucciones),
-        //ingredients y equipment
-        type: DataTypes.ARRAY({ type: DataTypes.JSON }),
-        allowNull: true,
+        //ingredients y equipment, yo solo voy a utilizar los step que va a ser un array de textos
+        type: DataTypes.ARRAY({ type: DataTypes.TEXT }),
+        defaultValue: [],
+      },
+      diet: {
+        type: DataTypes.ARRAY({ type: DataTypes.TEXT }),
+        defaultValue: [],
       },
     },
     {
