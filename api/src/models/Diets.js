@@ -5,13 +5,17 @@ module.exports = (sequelize) => {
     "diets",
     {
       id: {
-        type: DataTypes.UUID,
-        defaulValue: DataTypes.UUIDV4,
+        type: DataTypes.INTEGER,
+        allowNull: false,
         primaryKey: true,
       },
-      names: {
-        type: DataTypes.ARRAY({ type: DataTypes.TEXT }),
+      name: {
+        type: DataTypes.TEXT,
         allowNull: false,
+      },
+      information: {
+        type: DataTypes.TEXT,
+        allowNull: true,
       },
     },
     {

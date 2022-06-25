@@ -60,6 +60,23 @@ async function getRecipes(req, res, next) {
   }
 }
 
+async function getDetailRecipe(req, res, next) {
+  const { id } = req.params;
+  try {
+    const apiInf = await ApiCall();
+    const dbInf = await Recipe.findAll();
+    const totalInf = dbInf.concat(apiInf);
+    const idRecipe = totalInf.filter((e) => e.id == id); // tengo que poner doble por que si es estricta como viene como string
+    // no filtra correctamente
+    console.log(idRecipe);
+    idRecipe ? res.send(idRecipe) : res.send({ msg: "The id is invalid" });
+  } catch (e) {
+    console.log("fallo apicall o el findAll de recipes");
+    res.status(404).json({ msg: "The id is invalid" });
+  }
+}
+
 module.exports = {
   getRecipes,
+  getDetailRecipe,
 };
