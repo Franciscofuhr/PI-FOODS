@@ -15,14 +15,12 @@ export const getRecipes = () => {
   return async function (dispatch) {
     console.log("entro a las actions");
     return axios
-      .get(
-        `https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&addRecipeInformation=true&number=100`
-      ) //aca iria la ruta del back por ahora solamente busco en la api
+      .get(`http://localhost:3001/recipes`) //aca iria la ruta del back por ahora solamente busco en la api
       .then((r) => {
         return r.data;
       })
       .then((d) => {
-        return dispatch({ type: GET_RECIPES, payload: d.results });
+        return dispatch({ type: GET_RECIPES, payload: d });
       })
       .catch((e) => console.log(e));
   };
@@ -30,10 +28,17 @@ export const getRecipes = () => {
 
 export const getRecipeDetail = (id) => {
   return async function (dispatch) {
+    console.log("entro a la action de get recipes");
     return axios
-      .get(`https://api.spoonacular.com/recipes/${id}/information`) //aca iria ruta del back
-      .then((r) => r.data)
-      .then((d) => dispatch({ type: GET_RECIPE_DETAIL }))
-      .catch((e) => console.log(e));
+      .get(`http://localhost:3001/recipes/${id}`) //aca iria ruta del back
+      .then((r) => {
+        console.log(r.data);
+        return r.data;
+      })
+      .then((d) => dispatch({ type: GET_RECIPE_DETAIL, payload: d }))
+      .catch((e) => {
+        console.log(e);
+        console.log("error");
+      });
   };
 };

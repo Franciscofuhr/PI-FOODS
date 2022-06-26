@@ -37,7 +37,7 @@ const Recipes = () => {
     const nextPage = currentPage + 1;
     const initialItem = currentPage * ITEMS_PER_PAGE;
     const currentItems = nextPage * ITEMS_PER_PAGE;
-    if (currentItems >= recipes.length) return;
+    if (currentItems >= recipes.length + 9) return;
     setPageItems(recipes.slice(initialItem, currentItems)); //al ser un slice muestro las siguientes 9 recetas
     setCurrentPage(nextPage);
   };

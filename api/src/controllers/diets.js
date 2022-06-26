@@ -2,7 +2,7 @@ const dataForDiets = require("../data-diets");
 const { Recipe, Diets } = require("../db.js");
 
 async function getDiets(req, res, next) {
-  if (Diets.findAll() != {}) {
+  if ((await Diets.findAll()).length === 0) {
     try {
       // console.log(dataForDiets);
       const dietas = dataForDiets;
@@ -31,7 +31,7 @@ async function getDiets(req, res, next) {
       console.log(e);
     }
   } else {
-    res.send(Diets.findAll());
+    res.send(await Diets.findAll());
   }
 }
 module.exports = { getDiets };

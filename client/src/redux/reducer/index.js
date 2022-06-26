@@ -17,7 +17,8 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, recipes: action.payload };
 
     case GET_RECIPE_DETAIL:
-      return { ...state, recipeDetail: action.payload };
+      return { ...state, recipeDetail: action.payload[0] }; // como va a traer de la api un array con un objeto solo
+    //simplemente le digo que use de la posicion 0 para que a recipeDetail sea solo un objeto
 
     case GET_DIET_RECIPES:
       return { ...state, recipes: action.payload };
