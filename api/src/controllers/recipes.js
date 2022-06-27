@@ -2,9 +2,12 @@
 const { Recipe, Diets } = require("../db.js");
 const axios = require("axios");
 const { Op } = require("sequelize");
-const API_KEY = "0c3461e7cf7c436f9c8f1615d6433998";
+const API_KEY = "9f440dd04a2343038eca6f08e042722d";
 //0c3461e7cf7c436f9c8f1615d6433998
 //b12256479e1143308220e14ed0f40900
+//c437c991033243b59e8e402cc7ffda84
+// 261e6769e47344e493eca2ed9d45013e
+//9f440dd04a2343038eca6f08e042722d
 async function ApiCall() {
   //funciona la api call
   try {
@@ -21,7 +24,8 @@ async function ApiCall() {
         summary: e.summary.replace(/<[^>]*>?/g, ""), //quito los <b> que estan en el summary y los remplazo por ""
         steps: e.analyzedInstructions
           .map((r) => r.steps.map((s) => s.step))
-          .flat(2),
+          .flat(2)
+          .join(""),
       };
     });
     return informationFromApi;

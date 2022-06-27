@@ -29,14 +29,7 @@ const RecipeDetail = ({ match }) => {
             ? detailedRecipe.diets.map((diets) => <h6>{diets}</h6>)
             : null}
           <h2>Steps:</h2>
-          <ol>
-            {detailedRecipe.steps
-              ? detailedRecipe.steps.map((step) => <li>{step}</li>)
-              : null}
-          </ol>
-          {detailedRecipe.steps
-            ? detailedRecipe.steps.map((step) => <h6>{step}</h6>)
-            : null}
+          <h5>{detailedRecipe.steps}</h5>
         </>
       ) : null}
     </div>

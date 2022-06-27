@@ -15,6 +15,7 @@ async function createRecipe(req, res, next) {
     res.json(newRecipe);
   } catch (e) {
     console.log("fallo para crear recetas");
+    console.log(e);
     res.send(e);
   }
 }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getRecipes } from "../../redux/actions";
+import { getRecipes, getRecipesOrderAlphabetical } from "../../redux/actions";
 import { connect, useDispatch, useSelector } from "react-redux";
 import RecipesCard from "../RecipesCard/RecipesCard";
 //import NavBar from "../NavBar/NavBar";
@@ -49,10 +49,16 @@ const Recipes = () => {
     setCurrentPage(page);
   };
 
+  const OrderAlphabetical = (number) => {
+    dispatch(getRecipesOrderAlphabetical(number));
+  };
+
   console.log(pageItems, "page items");
   return (
     <>
       <div>
+        <button onClick={() => OrderAlphabetical(1)}>A - Z</button>
+        <button onClick={() => OrderAlphabetical(-1)}>Z - A</button>
         <span>
           <button onClick={prevHandler}>Previous Page</button>
           {NUMBER_PAGES?.map((e) => (

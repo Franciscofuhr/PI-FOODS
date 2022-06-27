@@ -4,11 +4,16 @@ import {
   GET_RECIPES_ORDER_ALPHABETICAL,
   GET_RECIPES_ORDER_SCORE,
   GET_RECIPE_DETAIL,
+  GET_RECIPES_SEARCH,
+  ADD_RECIPE,
+  GET_DIETS,
 } from "../actions";
 
 const initialState = {
   recipes: [],
   recipeDetail: {},
+  recipesSearch: [],
+  diets: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -20,21 +25,14 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, recipeDetail: action.payload[0] }; // como va a traer de la api un array con un objeto solo
     //simplemente le digo que use de la posicion 0 para que a recipeDetail sea solo un objeto
 
-    case GET_DIET_RECIPES:
-      return { ...state, recipes: action.payload };
+    case GET_DIETS:
+      return { ...state, diets: action.payload };
     case GET_RECIPES_ORDER_ALPHABETICAL: // supuse que los objetos en el array para ordenarlos alfabeticamente tiene la propiedad name
-      // recipes.sort(function (a, b) {
-      //   if (a.name > b.name) {
-      //     return 1;
-      //   }
-      //   if (a.name < b.name) {
-      //     return -1;
-      //   }
-      //   // a must be equal to b
-      //   return 0;
-      // });
-
       return { ...state, recipes: action.payload };
+    case GET_RECIPES_SEARCH:
+      return { ...state, recipes: action.payload };
+    case ADD_RECIPE:
+      return { ...state };
     default:
       return { ...state };
   }

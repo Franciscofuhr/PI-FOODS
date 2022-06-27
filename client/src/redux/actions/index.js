@@ -3,9 +3,12 @@ import axios from "axios";
 export const GET_RECIPES = "GET_RECIPES";
 export const GET_RECIPE_DETAIL = "GET_RECIPE_DETAIL";
 export const POST_RECIPE = "POST_RECIPE";
-export const GET_DIET_RECIPES = "GET_DIET_RECIPES";
+export const GET_DIETS = "GET_DIETS";
 export const GET_RECIPES_ORDER_SCORE = "GET_RECIPES_ORDER_SCORE";
 export const GET_RECIPES_ORDER_ALPHABETICAL = "GET_RECIPES_ORDER_ALPHABETICAL";
+export const GET_RECIPES_SEARCH = "GET_RECIPES_SEARCH";
+export const ADD_RECIPE = "ADD_RECIPE";
+
 const apiKey = "0c3461e7cf7c436f9c8f1615d6433998";
 //"ae67ad501e6942dfb88ac8cdce7089bd"; // guardar en variable de entorno
 //"261e6769e47344e493eca2ed9d45013e"; //
@@ -15,7 +18,7 @@ export const getRecipes = () => {
   return async function (dispatch) {
     console.log("entro a las actions");
     return axios
-      .get(`http://localhost:3001/recipes`) //aca iria la ruta del back por ahora solamente busco en la api
+      .get(`http://localhost:3001/recipes`) // busco en el back
       .then((r) => {
         return r.data;
       })
@@ -23,6 +26,31 @@ export const getRecipes = () => {
         return dispatch({ type: GET_RECIPES, payload: d });
       })
       .catch((e) => console.log(e));
+  };
+};
+
+export const getRecipesOrderAlphabetical = (number) => {
+  // en caso de que me llegue 1 por parametro ordena de A-Z Y sino alrevez
+  return async function (dispatch) {
+    axios
+      .get(`http://localhost:3001/recipes`)
+      .then((res) => {
+        let recipes = res.data;
+        recipes.sort(function (a, b) {
+          if (a.title > b.title) {
+            return number;
+          }
+          if (a.title < b.title) {
+            return number * -1;
+          }
+
+          return 0;
+        });
+        return recipes;
+      })
+      .then((res) =>
+        dispatch({ type: GET_RECIPES_ORDER_ALPHABETICAL, payload: res })
+      );
   };
 };
 
@@ -40,5 +68,38 @@ export const getRecipeDetail = (id) => {
         console.log(e);
         console.log("error");
       });
+  };
+};
+
+export const getRecipeSearch = (search) => {
+  return async function (dispatch) {
+    return axios
+      .get(`http://localhost:3001/recipes?name=${search}`)
+      .then((res) => res.data)
+      .then((res) => dispatch({ type: GET_RECIPES_SEARCH, payload: res }))
+      .catch((e) => {
+        console.log("error buscando a las recetas");
+        console.log(e);
+      });
+  };
+};
+
+export const getDiets = () => {
+  return async function (dispatch) {
+    return axios
+      .get(`http://localhost:3001/diets`)
+      .then((res) => dispatch({ type: GET_DIETS, payload: res.data }))
+      .catch((e) => {
+        console.log("error buscando las dietas");
+        console.log(e);
+      });
+  };
+};
+
+export const addRecipe = (body) => {
+  return async function (dispatch) {
+    return axios
+      .post(`http://localhost:3001/recipes`, body)
+      .then((res) => dispatch({ type: ADD_RECIPE, payload: res }));
   };
 };
