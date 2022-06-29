@@ -1,14 +1,13 @@
 const { Recipe } = require("../db.js");
 
 async function createRecipe(req, res, next) {
-  const { title, summary, healthScore, analyzedInstructions, image, diet } =
-    req.body;
+  const { title, summary, healthScore, steps, image, diet } = req.body;
   try {
     const newRecipe = await Recipe.create({
       title,
       summary,
       healthScore,
-      analyzedInstructions,
+      steps,
       image,
       diet,
     });

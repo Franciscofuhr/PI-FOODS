@@ -1,22 +1,43 @@
 import React, { useEffect, useState } from "react";
-import { getRecipes, getRecipesOrderAlphabetical } from "../../redux/actions";
+import {
+  getDietRecipes,
+  getDiets,
+  getRecipes,
+  getRecipesOrderAlphabetical,
+  getRecipesOrderScore,
+} from "../../redux/actions";
 import { connect, useDispatch, useSelector } from "react-redux";
 import RecipesCard from "../RecipesCard/RecipesCard";
 //import NavBar from "../NavBar/NavBar";
 
 const Recipes = () => {
   const dispatch = useDispatch();
+
+  const [ordered, setOrder] = useState("");
+
+  let recipes = useSelector((state) => state.recipes);
+
   const [pageItems, setPageItems] = useState([]); //empieza con un estado inicial de un array vacio
+
   const NUMBER_PAGES = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+
   const ITEMS_PER_PAGE = 9;
+
   useEffect(() => {
+    dispatch(getDiets());
     dispatch(getRecipes());
   }, [dispatch]); //despacho la accion para que el store se llene con las recetas
-  const recipes = useSelector((state) => state.recipes);
+
+  const diets = useSelector((state) => state.diets);
+
   useEffect(() => {
+    setCurrentPage(1);
     setPageItems(recipes.slice(0, ITEMS_PER_PAGE));
+    console.log("entra al Use Effect");
   }, [recipes]);
+
   console.log(recipes);
+  console.log(diets, "diets");
 
   const [currentPage, setCurrentPage] = useState(1); //armo un estado local con los elementos de la pagina y el numero del current page
 
@@ -49,16 +70,73 @@ const Recipes = () => {
     setCurrentPage(page);
   };
 
-  const OrderAlphabetical = (number) => {
-    dispatch(getRecipesOrderAlphabetical(number));
+  const OrderAlphabetical = (e) => {
+    console.log("entra a Order Alphabetical");
+    dispatch(getRecipesOrderAlphabetical(e.target.value)); //me va a dar 1 o -1
+    setCurrentPage(1);
+    setPageItems(recipes.slice(0, ITEMS_PER_PAGE));
+  };
+
+  const orderScore = (e) => {
+    e.preventDefault();
+    dispatch(getRecipesOrderScore(e.target.value));
+    setPageItems(recipes.slice(0, ITEMS_PER_PAGE));
+    setCurrentPage(1);
+  };
+  const filterDiets = (e) => {
+    dispatch(getDietRecipes(e.target.value));
+  };
+
+  const naturalOrder = () => {
+    dispatch(getRecipes());
   };
 
   console.log(pageItems, "page items");
   return (
     <>
       <div>
-        <button onClick={() => OrderAlphabetical(1)}>A - Z</button>
-        <button onClick={() => OrderAlphabetical(-1)}>Z - A</button>
+        Order by:
+        <select
+          //className={}
+          onChange={(e) => {
+            OrderAlphabetical(e);
+          }}
+        >
+          <option>Title</option>
+
+          <option name="Al Order" value={1}>
+            Alphabetical Order
+          </option>
+          <option name="RAl Order" value={-1}>
+            Reverse Alphabetical Order
+          </option>
+        </select>
+        <select
+          // className={}
+          onChange={(e) => {
+            orderScore(e);
+          }}
+        >
+          <option>By score</option>
+
+          <option value={1}>Best Scores</option>
+          <option value={-1}>Lowest Scores</option>
+        </select>
+        <select
+          // className={}
+          onChange={(e) => {
+            filterDiets(e);
+          }}
+        >
+          <option>By Diet</option>
+          {diets
+            ? diets.map((e) => (
+                <option key={e.id} name={e.name} value={e.name}>
+                  {e.name}
+                </option>
+              ))
+            : null}
+        </select>
         <span>
           <button onClick={prevHandler}>Previous Page</button>
           {NUMBER_PAGES?.map((e) => (
@@ -73,7 +151,7 @@ const Recipes = () => {
           <RecipesCard
             title={r.title}
             image={r.image}
-            diets={r.diets}
+            diet={r.diet}
             id={r.id}
           />
         ))}

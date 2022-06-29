@@ -8,6 +8,7 @@ export const GET_RECIPES_ORDER_SCORE = "GET_RECIPES_ORDER_SCORE";
 export const GET_RECIPES_ORDER_ALPHABETICAL = "GET_RECIPES_ORDER_ALPHABETICAL";
 export const GET_RECIPES_SEARCH = "GET_RECIPES_SEARCH";
 export const ADD_RECIPE = "ADD_RECIPE";
+export const GET_DIET_RECIPES = "GET_DIET_RECIPES";
 
 const apiKey = "0c3461e7cf7c436f9c8f1615d6433998";
 //"ae67ad501e6942dfb88ac8cdce7089bd"; // guardar en variable de entorno
@@ -31,26 +32,21 @@ export const getRecipes = () => {
 
 export const getRecipesOrderAlphabetical = (number) => {
   // en caso de que me llegue 1 por parametro ordena de A-Z Y sino alrevez
-  return async function (dispatch) {
-    axios
-      .get(`http://localhost:3001/recipes`)
-      .then((res) => {
-        let recipes = res.data;
-        recipes.sort(function (a, b) {
-          if (a.title > b.title) {
-            return number;
-          }
-          if (a.title < b.title) {
-            return number * -1;
-          }
+  console.log("entra a las actions order alpha");
+  return {
+    type: GET_RECIPES_ORDER_ALPHABETICAL,
+    payload: number,
+  };
+};
 
-          return 0;
-        });
-        return recipes;
-      })
-      .then((res) =>
-        dispatch({ type: GET_RECIPES_ORDER_ALPHABETICAL, payload: res })
-      );
+export const getRecipesOrderScore = (number) => {
+  return { type: GET_RECIPES_ORDER_SCORE, payload: number };
+};
+
+export const getDietRecipes = (diet) => {
+  return {
+    type: GET_DIET_RECIPES,
+    payload: diet,
   };
 };
 

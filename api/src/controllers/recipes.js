@@ -18,7 +18,7 @@ async function ApiCall() {
       return {
         id: e.id, //voy a identificar el id de los creados fijandome si tiene guion o no
         title: e.title,
-        diets: e.diets,
+        diet: e.diets,
         image: e.image,
         healthScore: e.healthScore,
         summary: e.summary.replace(/<[^>]*>?/g, ""), //quito los <b> que estan en el summary y los remplazo por ""

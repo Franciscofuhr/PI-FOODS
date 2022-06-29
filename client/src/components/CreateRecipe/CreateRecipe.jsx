@@ -7,7 +7,7 @@ const CreateRecipe = () => {
   const diets = useSelector((state) => state.diets);
   const [newRecipe, setNewRecipe] = useState({
     title: "",
-    diets: [],
+    diet: [],
     image: "",
     healthScore: null,
     summary: "",
@@ -32,7 +32,7 @@ const CreateRecipe = () => {
     alert("You created a recipe!");
     setNewRecipe({
       title: "",
-      diets: [],
+      diet: [],
       image: "",
       healthScore: null,
       summary: "",
@@ -40,10 +40,19 @@ const CreateRecipe = () => {
     });
   };
   const handleCheck = (e) => {
+    console.log(e.target.checked);
     if (e.target.checked) {
       setNewRecipe({
         ...newRecipe,
-        diets: [...newRecipe.diets, e.target.value],
+        diet: [...newRecipe.diet, e.target.name],
+      });
+
+      console.log(newRecipe);
+    } else {
+      //en caso de sacar chequear y despues deschequear para sacarlo
+      setNewRecipe({
+        ...newRecipe,
+        diet: newRecipe.diet.filter((e) => e === e.target.name),
       });
     }
   };
@@ -60,6 +69,14 @@ const CreateRecipe = () => {
             type="text"
             name="title"
             placeholder="Title of the recipe"
+            onChange={(e) => handleInputChange(e)}
+          />
+        </div>
+        <div>
+          <input
+            type="text"
+            name="healthScore"
+            placeholder="Health Score"
             onChange={(e) => handleInputChange(e)}
           />
         </div>
@@ -83,6 +100,7 @@ const CreateRecipe = () => {
           Add Steps
           <input
             type="text"
+            name="steps"
             placeholder="number of steps"
             onChange={(e) => handleInputChange(e)}
           />

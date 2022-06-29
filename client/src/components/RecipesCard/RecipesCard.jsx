@@ -8,7 +8,7 @@ const RecipesCard = (props) => {
         <h3>{props.title}</h3>
       </Link>
       <img src={props.image} alt={props.title} />
-      {props.diets?.map((dietas) => (
+      {props.diet?.map((dietas) => (
         <div>
           <h5>{dietas}</h5>
         </div>

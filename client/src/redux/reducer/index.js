@@ -11,8 +11,8 @@ import {
 
 const initialState = {
   recipes: [],
+  recipesRender: [],
   recipeDetail: {},
-  recipesSearch: [],
   diets: [],
 };
 
@@ -28,9 +28,42 @@ const rootReducer = (state = initialState, action) => {
     case GET_DIETS:
       return { ...state, diets: action.payload };
     case GET_RECIPES_ORDER_ALPHABETICAL: // supuse que los objetos en el array para ordenarlos alfabeticamente tiene la propiedad name
-      return { ...state, recipes: action.payload };
+      let orderRecipes = state.recipes;
+      console.log("entra a el reducer");
+      orderRecipes.sort(function (a, b) {
+        if (a.title > b.title) {
+          return action.payload;
+        }
+        if (a.title < b.title) {
+          return action.payload * -1;
+        }
+
+        return 0;
+      });
+
+      return { ...state, recipes: orderRecipes };
     case GET_RECIPES_SEARCH:
       return { ...state, recipes: action.payload };
+    case GET_RECIPES_ORDER_SCORE:
+      let recipesOrderScore = [];
+      recipesOrderScore = state.recipes.sort(function (a, b) {
+        if (a.healthScore < b.healthScore) {
+          return action.payload;
+        }
+        if (a.healthScore > b.healthScore) {
+          return action.payload * -1;
+        }
+
+        return 0;
+      });
+      return { ...state, recipes: recipesOrderScore };
+    case GET_DIET_RECIPES:
+      let dietRecipes = state.recipes;
+      let typeDiet = action.payload.toLowerCase();
+      return {
+        ...state,
+        recipes: dietRecipes.filter((e) => e.diet.includes(typeDiet)),
+      };
     case ADD_RECIPE:
       return { ...state };
     default:
