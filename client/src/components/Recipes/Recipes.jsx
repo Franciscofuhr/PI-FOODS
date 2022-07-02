@@ -8,6 +8,8 @@ import {
 } from "../../redux/actions";
 import { connect, useDispatch, useSelector } from "react-redux";
 import RecipesCard from "../RecipesCard/RecipesCard";
+import c from "./Recipes.module.css";
+
 //import NavBar from "../NavBar/NavBar";
 
 const Recipes = () => {
@@ -84,6 +86,9 @@ const Recipes = () => {
     setCurrentPage(1);
   };
   const filterDiets = (e) => {
+    if (e.target.value === "None") {
+      return dispatch(getRecipes());
+    }
     dispatch(getDietRecipes(e.target.value));
   };
 
@@ -93,7 +98,7 @@ const Recipes = () => {
 
   console.log(pageItems, "page items");
   return (
-    <>
+    <div className={c.recipesbackground}>
       <div>
         Order by:
         <select
@@ -128,7 +133,7 @@ const Recipes = () => {
             filterDiets(e);
           }}
         >
-          <option>By Diet</option>
+          <option value="None">By Diet</option>
           {diets
             ? diets.map((e) => (
                 <option key={e.id} name={e.name} value={e.name}>
@@ -147,16 +152,19 @@ const Recipes = () => {
           {currentPage}
           <button onClick={nextHandler}>Next Page</button>
         </span>
-        {pageItems?.map((r) => (
-          <RecipesCard
-            title={r.title}
-            image={r.image}
-            diet={r.diet}
-            id={r.id}
-          />
-        ))}
+        <div className={c.showrecipes}>
+          {pageItems?.map((r) => (
+            <RecipesCard
+              key={r.id}
+              title={r.title}
+              image={r.image}
+              diet={r.diet}
+              id={r.id}
+            />
+          ))}
+        </div>
       </div>
-    </>
+    </div>
   );
 };
 

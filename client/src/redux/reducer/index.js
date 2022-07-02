@@ -58,8 +58,8 @@ const rootReducer = (state = initialState, action) => {
       });
       return { ...state, recipes: recipesOrderScore };
     case GET_DIET_RECIPES:
-      let dietRecipes = state.recipes;
-      let typeDiet = action.payload.toLowerCase();
+      let dietRecipes = action.payload;
+      let typeDiet = action.filter.toLowerCase();
       return {
         ...state,
         recipes: dietRecipes.filter((e) => e.diet.includes(typeDiet)),

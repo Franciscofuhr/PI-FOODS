@@ -5,10 +5,10 @@ import { getRecipeDetail } from "../../redux/actions";
 
 const RecipeDetail = ({ match }) => {
   const id = match.params.id;
-  console.log(id);
   const dispatch = useDispatch();
   let detailedRecipe = useSelector((state) => state.recipeDetail);
 
+  console.log(detailedRecipe.image);
   useEffect(() => {
     // despacho la action que va a llenar el estado global de detailedRecipe
     dispatch(getRecipeDetail(id));
@@ -25,8 +25,8 @@ const RecipeDetail = ({ match }) => {
             <h2>Summary:</h2>
             <h5> {detailedRecipe.summary}</h5>
           </span>
-          {detailedRecipe.diets
-            ? detailedRecipe.diets.map((diets) => <h6>{diets}</h6>)
+          {detailedRecipe.diet
+            ? detailedRecipe.diet.map((diets) => <h6>{diets}</h6>)
             : null}
           <h2>Steps:</h2>
           <h5>{detailedRecipe.steps}</h5>

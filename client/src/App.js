@@ -2,7 +2,7 @@ import React from "react";
 import NavBar from "./components/NavBar/NavBar";
 import LandingPage from "./components/LandingPage/LandingPage";
 import Recipes from "./components/Recipes/Recipes";
-import { Route, Switch } from "react-router-dom";
+import { Route } from "react-router-dom";
 import RecipeDetail from "./components/RecipeDetail/RecipeDetail";
 import CreateRecipe from "./components/CreateRecipe/CreateRecipe";
 import Diets from "./components/Diets/Diets";

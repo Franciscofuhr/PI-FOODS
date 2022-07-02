@@ -44,9 +44,17 @@ export const getRecipesOrderScore = (number) => {
 };
 
 export const getDietRecipes = (diet) => {
-  return {
-    type: GET_DIET_RECIPES,
-    payload: diet,
+  return async function (dispatch) {
+    console.log("entro a las actions");
+    return axios
+      .get(`http://localhost:3001/recipes`) // busco en el back
+      .then((r) => {
+        return r.data;
+      })
+      .then((d) => {
+        return dispatch({ type: GET_DIET_RECIPES, payload: d, filter: diet });
+      })
+      .catch((e) => console.log(e));
   };
 };
 

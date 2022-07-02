@@ -2,7 +2,7 @@
 const { Recipe, Diets } = require("../db.js");
 const axios = require("axios");
 const { Op } = require("sequelize");
-const API_KEY = "9f440dd04a2343038eca6f08e042722d";
+const API_KEY = "0c3461e7cf7c436f9c8f1615d6433998";
 //0c3461e7cf7c436f9c8f1615d6433998
 //b12256479e1143308220e14ed0f40900
 //c437c991033243b59e8e402cc7ffda84

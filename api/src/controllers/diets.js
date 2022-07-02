@@ -1,4 +1,5 @@
 const dataForDiets = require("../data-diets");
+
 const { Recipe, Diets } = require("../db.js");
 
 async function getDiets(req, res, next) {
