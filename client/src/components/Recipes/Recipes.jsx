@@ -3,6 +3,7 @@ import {
   getDietRecipes,
   getDiets,
   getRecipes,
+  getRecipeSearch,
   getRecipesOrderAlphabetical,
   getRecipesOrderScore,
 } from "../../redux/actions";
@@ -14,6 +15,10 @@ import c from "./Recipes.module.css";
 
 const Recipes = () => {
   const dispatch = useDispatch();
+
+  let dietsSearch = useSelector((state) => state.dietsSearch);
+
+  const [recipeSearch, setRecipeSearch] = useState("");
 
   const [ordered, setOrder] = useState("");
 
@@ -95,10 +100,36 @@ const Recipes = () => {
   const naturalOrder = () => {
     dispatch(getRecipes());
   };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(getRecipeSearch(recipeSearch));
+    console.log("entra en el submit");
+  };
+  const handleOnChange = (e) => {
+    setRecipeSearch(e.target.value);
+  };
 
   console.log(pageItems, "page items");
   return (
     <div className={c.recipesbackground}>
+      <div>
+        <form onSubmit={(e) => handleSubmit(e)}>
+          <div>
+            <label className="label" htmlFor="title">
+              Recipe:
+            </label>
+            <input
+              type="text"
+              id="recipeSearch"
+              autoComplete="off"
+              value={recipeSearch}
+              onChange={(e) => handleOnChange(e)}
+            />
+
+            <button type="submit">SEARCH</button>
+          </div>
+        </form>
+      </div>
       <div>
         Order by:
         <select
@@ -134,10 +165,10 @@ const Recipes = () => {
           }}
         >
           <option value="None">By Diet</option>
-          {diets
-            ? diets.map((e) => (
-                <option key={e.id} name={e.name} value={e.name}>
-                  {e.name}
+          {dietsSearch
+            ? dietsSearch.map((e) => (
+                <option key={e} name={e} value={e}>
+                  {e}
                 </option>
               ))
             : null}

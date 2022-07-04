@@ -14,6 +14,18 @@ const initialState = {
   recipesRender: [],
   recipeDetail: {},
   diets: [],
+  dietsSearch: [
+    "Gluten free",
+    "Dairy free",
+    "Paleolithic",
+    "Lacto ovo vegetarian",
+    "Primal",
+    "Whole 30",
+    "Vegan",
+    "Fodmap friendly",
+    "Ketogenic",
+    "Pescatarian",
+  ],
 };
 
 const rootReducer = (state = initialState, action) => {

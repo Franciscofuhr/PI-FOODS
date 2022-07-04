@@ -17,42 +17,51 @@ const CreateRecipe = () => {
     steps: "",
   });
 
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState({
+    title: "Enter the name of the recipe",
 
-  const validator = (state) => {
+    image: "Would be nice to show how you recipe looks",
+    healthScore: "The healthScore must be a number between 0 and 100",
+    summary: "Would be nice if you tell us a little bit of this recipe",
+    steps: "Would be nice if you tell us how to do it ourselves",
+  });
+
+  const validator = (e) => {
     // meter al estado y modificar a partir de ahi
     // le paso por parametro e
     let validations = {};
     const beNumber = /(^\d{1,10}$)/;
+    const property = e.target.name;
+    const value = e.target.value;
 
-    if (!state.title) {
-      validations.title = "Enter the name of the recipe";
+    if (property === "title" && !value) {
+      return (validations[property] = "Enter the name of the recipe");
     }
     if (
-      state.healthScore < 0 ||
-      state.healthScore > 100 ||
-      !beNumber.test(state.healthScore) ||
-      !state.healthScore
+      property === "healthScore" &&
+      (value < 0 || value > 100 || !beNumber.test(value) || !value)
     ) {
-      validations.healthScore =
-        "The healthScore must be a number between 0 and 100";
+      return (validations[property] =
+        "The healthScore must be a number between 0 and 100");
     }
-    if (!state.summary) {
-      validations.summary =
-        "Would be nice if you tell us a little bit of this recipe";
+    if (property === "summary" && !value) {
+      return (validations.summary =
+        "Would be nice if you tell us a little bit of this recipe");
     }
-    if (!state.steps) {
-      validations.steps = "Would be nice if you tell us how to do it ourselves";
+    if (property === "steps" && !value) {
+      return (validations.steps =
+        "Would be nice if you tell us how to do it ourselves");
     }
-    if (!state.image) {
-      validations.image = "Would be nice to show how you recipe looks";
+    if (property === "image" && !value) {
+      return (validations.image = "Would be nice to show how you recipe looks");
     }
+    validations[property] = "";
 
-    return validations;
+    return validations[property];
   };
 
   const handleInputChange = (e) => {
-    console.log(e.target.value);
+    // console.log(e.target.value);
     if (e.target.name == "healthScore") {
       setNewRecipe({
         ...newRecipe,
@@ -63,8 +72,10 @@ const CreateRecipe = () => {
       ...newRecipe,
       [e.target.name]: e.target.value,
     });
-    console.log(newRecipe);
-    setErrors(validator(newRecipe));
+    // console.log(validator(e));
+    // console.log(e.target.value);
+
+    setErrors({ ...errors, [e.target.name]: validator(e) });
   };
 
   const handleSubmit = (e) => {
@@ -174,7 +185,7 @@ const CreateRecipe = () => {
             : null}
         </div>
         <div>
-          {newRecipe.title && newRecipe.summary ? (
+          {!errors.title && !errors.summary ? (
             <button type="submit">CREATE</button>
           ) : null}
         </div>
