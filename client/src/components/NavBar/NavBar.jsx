@@ -19,14 +19,14 @@ const NavBar = () => {
           to="/recipes"
           onClick={() => backToHome()}
         >
-          Home
+          <i class="fa-solid fa-house"></i>Home
         </Link>
       </div>
       <Link className={c.links} to="/recipes/diets">
-        Diets
+        <i class="fa-solid fa-list"></i>Diets
       </Link>
       <Link className={c.links} to="/recipes/createRecipe">
-        Create a recipe
+        <i class="fa-solid fa-circle-plus"></i>Create a recipe
       </Link>
     </div>
   );

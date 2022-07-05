@@ -1,4 +1,4 @@
-const { Recipe } = require("../db.js");
+const { Recipe, Diets } = require("../db.js");
 
 async function createRecipe(req, res, next) {
   const { title, summary, healthScore, steps, image, diet } = req.body;
@@ -9,8 +9,11 @@ async function createRecipe(req, res, next) {
       healthScore,
       steps,
       image,
-      diet,
     });
+    const dietRecipe = await Diets.findAll({
+      where: { name: diet },
+    });
+    newRecipe.addDiets(dietRecipe);
     res.json(newRecipe);
   } catch (e) {
     console.log("fallo para crear recetas");

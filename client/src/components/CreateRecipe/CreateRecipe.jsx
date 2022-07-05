@@ -117,79 +117,95 @@ const CreateRecipe = () => {
 
   return (
     <div className={c.backgroundcreate}>
-      <form onSubmit={(e) => handleSubmit(e)}>
-        <div>
-          <input
-            type="text"
-            name="title"
-            placeholder="Title of the recipe"
-            onChange={(e) => handleInputChange(e)}
-          />
-          {errors.title ? <span>{errors.title}</span> : null}
-        </div>
-        <div>
-          <input
-            type="text"
-            name="healthScore"
-            placeholder="Health Score"
-            onChange={(e) => handleInputChange(e)}
-          />
-        </div>
-        {errors.healthScore ? <span>{errors.healthScore}</span> : null}
-        <div>
-          <input
-            type="text"
-            name="image"
-            placeholder="URL of the photo"
-            onChange={(e) => handleInputChange(e)}
-          />
-        </div>
-        {errors.image ? <span>{errors.image}</span> : null}
+      <div className={c.createcontainer}>
+        <form onSubmit={(e) => handleSubmit(e)}>
+          <div className={c.inputsanderrors}>
+            <input
+              type="text"
+              name="title"
+              placeholder="Title of the recipe"
+              onChange={(e) => handleInputChange(e)}
+              className={c.shortinput}
+            />
+            {errors.title ? (
+              <div className={c.errors}>{errors.title}</div>
+            ) : null}
+          </div>
+          <div className={c.inputsanderrors}>
+            <input
+              type="text"
+              name="healthScore"
+              placeholder="Health Score"
+              onChange={(e) => handleInputChange(e)}
+              className={c.shortinput}
+            />
+            {errors.healthScore ? (
+              <div className={c.errors}>{errors.healthScore}</div>
+            ) : null}
+          </div>
+          <div className={c.inputsanderrors}>
+            <input
+              type="text"
+              name="image"
+              placeholder="URL of the photo"
+              onChange={(e) => handleInputChange(e)}
+              className={c.shortinput}
+            />
+            {errors.image ? (
+              <div className={c.errors}>{errors.image}</div>
+            ) : null}
+          </div>
 
-        <div>
-          <textarea
-            type="text"
-            name="summary"
-            placeholder="Summary of the recipe"
-            onChange={(e) => handleInputChange(e)}
-          />
-        </div>
-        {errors.summary ? <span>{errors.summary}</span> : null}
+          <div className={c.inputsanderrors}>
+            <textarea
+              className={c.longinput}
+              type="text"
+              name="summary"
+              placeholder="Summary of the recipe"
+              onChange={(e) => handleInputChange(e)}
+            />
+            {errors.summary ? (
+              <div className={c.errors}>{errors.summary}</div>
+            ) : null}
+          </div>
 
-        <div>
-          Steps
-          <input
-            type="text"
-            name="steps"
-            placeholder="number of steps"
-            onChange={(e) => handleInputChange(e)}
-          />
-          {errors.steps ? <span>{errors.steps}</span> : null}
-        </div>
-        <div>
-          {diets
-            ? diets.map((diet) => {
-                return (
-                  <span key={`${diet.name}`}>
-                    <input
-                      key={`${diet.id}`}
-                      type="checkbox"
-                      value={`${diet.name}`}
-                      name={`${diet.name}`}
-                      onChange={(e) => handleCheck(e)}
-                    />
-                    {diet.name}
-                  </span>
-                );
-              })
-            : null}
-        </div>
-        <div>
-          {!errors.title && !errors.summary ? (
-            <button type="submit">CREATE</button>
-          ) : null}
-        </div>
-      </form>
+          <div className={c.inputsanderrors}>
+            <div>Steps</div>
+            <textarea
+              className={c.longinput}
+              type="text"
+              name="steps"
+              placeholder="number of steps"
+              onChange={(e) => handleInputChange(e)}
+            />
+            {errors.steps ? (
+              <div className={c.errors}>{errors.steps}</div>
+            ) : null}
+            <div className={c.inputsanderrors}></div>
+            {diets
+              ? diets.map((diet) => {
+                  return (
+                    <span key={`${diet.name}`}>
+                      <input
+                        key={`${diet.id}`}
+                        type="checkbox"
+                        value={`${diet.name}`}
+                        name={`${diet.name}`}
+                        onChange={(e) => handleCheck(e)}
+                      />
+                      {diet.name}
+                    </span>
+                  );
+                })
+              : null}
+          </div>
+          <div>
+            {!errors.title && !errors.summary ? (
+              <button type="submit">CREATE</button>
+            ) : null}
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

@@ -1,0 +1,120 @@
+.componentcontainer{
+    background-image: url(../../Pictures/pexels-elle-hughes-1660030.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    min-height: 100vh;
+    min-width: 100vh;
+    max-width: 100%;
+    max-height: 100%;
+    padding: 20px;
+    font-family: 'Arima', cursive;
+    font-weight: 800;
+
+}
+.headdetail{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0px 80px 0px 80px;
+    margin: 0px 10px 10px 10px;
+    background-color:beige;
+    border: 3px solid rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    
+    
+
+}
+.title{
+    /* text-decoration: wavy; */
+    color:rgb(3, 41, 0);
+    font-family: 'Arima', cursive;
+    font-weight: 800;
+    
+}
+.health{
+    color:rgb(0, 0, 0);
+    font-family: 'Arima', cursive;
+    font-weight: 700;
+
+}
+.summstepscontainer{
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    /* box-shadow: 0px 1px 10px rgb(0,0,0,0.2); */
+}
+.typetext{
+    padding: 0px;
+    width: 350px;
+    box-shadow: 0px 1px 10px rgb(0,0,0,0.2);
+    background-color: rgba(2, 54, 14, 0.96);
+    border: 3px solid rgba(244, 248, 221, 0.247);
+    border-radius: 10px;
+    color: rgb(196, 218, 200);
+}
+.typeinformation{
+    padding: 20px;
+    box-shadow: 0px 1px 10px rgb(0,0,0,0.2);
+    background-color: rgba(131, 255, 93, 0.93);
+    border: 3px solid rgb(32, 29, 25,0.87);
+    border-radius: 10px;
+    color:rgb(32, 29, 25);
+    font-size: 18px;
+
+}
+.bodycontainer{
+    display:row;
+    flex-direction: center;
+    justify-content: center !important;
+    align-items: center;
+}
+.imagecontainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.image{
+    height: 280px;
+    width: 500px;
+    border: 3px solid rgba(9, 66, 21, 0.336);
+    box-shadow: 0px 1px 10px rgb(0,0,0,0.2);
+    border-radius: 20px;
+    
+}
+.dietscontainer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+
+    
+}
+.dietname{
+    padding: 0px;
+    width: 350px;
+    box-shadow: 0px 1px 10px rgb(0,0,0,0.2);
+    background-color: rgba(2, 54, 14, 0.96);
+    border: 3px solid rgba(244, 248, 221, 0.247);
+    border-radius: 10px;
+    color: rgb(196, 218, 200);
+    text-align: center;
+    
+}
+.totaldiets{
+    display:flex;
+    flex-direction: center;
+    justify-content: center !important;
+    align-items: center;
+    font-size: 20px;
+}
+.diets{
+    padding: 10px 30px 10px 30px;
+    border: 3px solid rgb(32, 29, 25,0.87);
+    margin: 0px 20px 0px 20px;
+    border-radius: 50px; 
+    background-color: rgba(131, 255, 93, 0.952);
+    color:rgb(32, 29, 25);
+}

@@ -16,7 +16,7 @@ import c from "./Recipes.module.css";
 const Recipes = () => {
   const dispatch = useDispatch();
 
-  let dietsSearch = useSelector((state) => state.dietsSearch);
+  let dietsSearch = useSelector((state) => state.diets);
 
   const [recipeSearch, setRecipeSearch] = useState("");
 
@@ -26,8 +26,6 @@ const Recipes = () => {
 
   const [pageItems, setPageItems] = useState([]); //empieza con un estado inicial de un array vacio
 
-  const NUMBER_PAGES = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
-
   const ITEMS_PER_PAGE = 9;
 
   useEffect(() => {
@@ -35,16 +33,12 @@ const Recipes = () => {
     dispatch(getRecipes());
   }, [dispatch]); //despacho la accion para que el store se llene con las recetas
 
-  const diets = useSelector((state) => state.diets);
-
   useEffect(() => {
     setCurrentPage(1);
     setPageItems(recipes.slice(0, ITEMS_PER_PAGE));
-    console.log("entra al Use Effect");
   }, [recipes]);
 
   console.log(recipes);
-  console.log(diets, "diets");
 
   const [currentPage, setCurrentPage] = useState(1); //armo un estado local con los elementos de la pagina y el numero del current page
 
@@ -97,9 +91,6 @@ const Recipes = () => {
     dispatch(getDietRecipes(e.target.value));
   };
 
-  const naturalOrder = () => {
-    dispatch(getRecipes());
-  };
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(getRecipeSearch(recipeSearch));
@@ -114,75 +105,81 @@ const Recipes = () => {
     <div className={c.recipesbackground}>
       <div>
         <form onSubmit={(e) => handleSubmit(e)}>
-          <div>
-            <label className="label" htmlFor="title">
-              Recipe:
-            </label>
+          <div className={c.searchcontainer}>
             <input
               type="text"
               id="recipeSearch"
               autoComplete="off"
+              placeholder="Search a recipe..."
               value={recipeSearch}
               onChange={(e) => handleOnChange(e)}
+              className={c.searchtext}
             />
 
-            <button type="submit">SEARCH</button>
+            <button type="submit" className={c.searchbutton}>
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
           </div>
         </form>
       </div>
       <div>
-        Order by:
-        <select
-          //className={}
-          onChange={(e) => {
-            OrderAlphabetical(e);
-          }}
-        >
-          <option>Title</option>
+        <div className={c.filters}>
+          <h3 className={c.orderby}>Order by:</h3>
+          <select
+            //className={}
+            onChange={(e) => {
+              OrderAlphabetical(e);
+            }}
+          >
+            <option selected disabled className={c.option}>
+              Title
+            </option>
 
-          <option name="Al Order" value={1}>
-            Alphabetical Order
-          </option>
-          <option name="RAl Order" value={-1}>
-            Reverse Alphabetical Order
-          </option>
-        </select>
-        <select
-          // className={}
-          onChange={(e) => {
-            orderScore(e);
-          }}
-        >
-          <option>By score</option>
+            <option name="Al Order" value={1} className={c.option}>
+              Alphabetical Order
+            </option>
+            <option name="RAl Order" value={-1} className={c.option}>
+              Reverse Alphabetical Order
+            </option>
+          </select>
+          <select
+            // className={}
+            onChange={(e) => {
+              orderScore(e);
+            }}
+          >
+            <option selected disabled className={c.option}>
+              By score
+            </option>
 
-          <option value={1}>Best Scores</option>
-          <option value={-1}>Lowest Scores</option>
-        </select>
-        <select
-          // className={}
-          onChange={(e) => {
-            filterDiets(e);
-          }}
-        >
-          <option value="None">By Diet</option>
-          {dietsSearch
-            ? dietsSearch.map((e) => (
-                <option key={e} name={e} value={e}>
-                  {e}
-                </option>
-              ))
-            : null}
-        </select>
-        <span>
-          <button onClick={prevHandler}>Previous Page</button>
-          {NUMBER_PAGES?.map((e) => (
-            <button key={e} onClick={() => numberPage(e)}>
-              {e}
-            </button>
-          ))}
-          {currentPage}
-          <button onClick={nextHandler}>Next Page</button>
-        </span>
+            <option value={1} className={c.option}>
+              Best Scores
+            </option>
+            <option value={-1} className={c.option}>
+              Lowest Scores
+            </option>
+          </select>
+          <select
+            // className={}
+            onChange={(e) => {
+              filterDiets(e);
+            }}
+          >
+            <option value="None">By Diet</option>
+            {dietsSearch
+              ? dietsSearch.map((e) => (
+                  <option
+                    key={e.id}
+                    name={e.name}
+                    value={e.name}
+                    className={c.option}
+                  >
+                    {e.name}
+                  </option>
+                ))
+              : null}
+          </select>
+        </div>
         <div className={c.showrecipes}>
           {pageItems?.map((r) => (
             <RecipesCard
@@ -193,6 +190,16 @@ const Recipes = () => {
               id={r.id}
             />
           ))}
+        </div>
+        <div className={c.pagenumbers}>
+          <button onClick={prevHandler} className={c.nextprev}>
+            <i class="fa-solid fa-angle-left"></i> Previous Page
+          </button>
+
+          <h3 className={c.current}>{currentPage}</h3>
+          <button onClick={nextHandler} className={c.nextprev}>
+            Next Page <i class="fa-solid fa-angle-right"></i>
+          </button>
         </div>
       </div>
     </div>

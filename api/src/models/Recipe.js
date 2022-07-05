@@ -35,10 +35,6 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         defaultValue: "",
       },
-      diet: {
-        type: DataTypes.ARRAY({ type: DataTypes.TEXT }),
-        defaultValue: [],
-      },
     },
     {
       timestamps: false,
