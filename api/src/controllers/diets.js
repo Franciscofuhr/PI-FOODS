@@ -11,6 +11,7 @@ async function getDiets(req, res, next) {
         await Diets.create({
           id: i,
           name: dietas[i].name,
+          information: dietas[i].information,
         });
       }
       // const newDiet = await Diets.create({

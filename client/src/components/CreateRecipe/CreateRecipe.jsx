@@ -94,7 +94,9 @@ const CreateRecipe = () => {
   };
 
   const handleCheck = (e) => {
-    console.log(e.target.checked);
+    const filterdiet = newRecipe.diet;
+    console.log(filterdiet);
+    console.log(e.target.name);
     if (e.target.checked) {
       setNewRecipe({
         ...newRecipe,
@@ -106,8 +108,9 @@ const CreateRecipe = () => {
       //en caso de sacar chequear y despues deschequear para sacarlo
       setNewRecipe({
         ...newRecipe,
-        diet: newRecipe.diet.filter((e) => e === e.target.name),
+        diet: filterdiet.filter((d) => d !== e.target.name),
       });
+      console.log(newRecipe.diet);
     }
   };
 
@@ -120,6 +123,7 @@ const CreateRecipe = () => {
       <div className={c.createcontainer}>
         <form onSubmit={(e) => handleSubmit(e)}>
           <div className={c.inputsanderrors}>
+            <h3>Title</h3>
             <input
               type="text"
               name="title"
@@ -132,6 +136,7 @@ const CreateRecipe = () => {
             ) : null}
           </div>
           <div className={c.inputsanderrors}>
+            <h3>HealthScore</h3>
             <input
               type="text"
               name="healthScore"
@@ -144,6 +149,7 @@ const CreateRecipe = () => {
             ) : null}
           </div>
           <div className={c.inputsanderrors}>
+            <h3>Image</h3>
             <input
               type="text"
               name="image"
@@ -157,6 +163,7 @@ const CreateRecipe = () => {
           </div>
 
           <div className={c.inputsanderrors}>
+            <h3>Summary</h3>
             <textarea
               className={c.longinput}
               type="text"
@@ -170,7 +177,7 @@ const CreateRecipe = () => {
           </div>
 
           <div className={c.inputsanderrors}>
-            <div>Steps</div>
+            <h3>Steps</h3>
             <textarea
               className={c.longinput}
               type="text"
@@ -181,7 +188,9 @@ const CreateRecipe = () => {
             {errors.steps ? (
               <div className={c.errors}>{errors.steps}</div>
             ) : null}
-            <div className={c.inputsanderrors}></div>
+          </div>
+          <div className={c.inputsanderrors}>
+            <h3>Diets</h3>
             {diets
               ? diets.map((diet) => {
                   return (
@@ -192,6 +201,7 @@ const CreateRecipe = () => {
                         value={`${diet.name}`}
                         name={`${diet.name}`}
                         onChange={(e) => handleCheck(e)}
+                        className={c.checkbox}
                       />
                       {diet.name}
                     </span>
@@ -201,7 +211,9 @@ const CreateRecipe = () => {
           </div>
           <div>
             {!errors.title && !errors.summary ? (
-              <button type="submit">CREATE</button>
+              <button type="submit" className={c.createbutton}>
+                CREATE
+              </button>
             ) : null}
           </div>
         </form>

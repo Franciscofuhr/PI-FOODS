@@ -3,10 +3,11 @@ const { Recipe, Diets } = require("../db.js");
 const axios = require("axios");
 const { Op } = require("sequelize");
 const db = require("../db.js");
-const API_KEY = "b12256479e1143308220e14ed0f40900";
+const API_KEY = "81c89abda23647658e85266b87ad521b";
 //0c3461e7cf7c436f9c8f1615d6433998
 //b12256479e1143308220e14ed0f40900
 //c437c991033243b59e8e402cc7ffda84
+//81c89abda23647658e85266b87ad521b
 // 261e6769e47344e493eca2ed9d45013e
 //9f440dd04a2343038eca6f08e042722d
 async function ApiCall() {
@@ -81,8 +82,19 @@ async function getDetailRecipe(req, res, next) {
   const { id } = req.params;
   try {
     const apiInf = await ApiCall();
-    const dbInf = await Recipe.findAll();
-    const totalInf = dbInf.concat(apiInf);
+    const dbInf = await Recipe.findAll({ include: Diets });
+    const realdbInf = dbInf.map((e) => {
+      return {
+        id: e.id, //voy a identificar el id de los creados fijandome si tiene guion o no
+        title: e.title,
+        diet: e.diets.map((e) => e.name),
+        image: e.image,
+        healthScore: e.healthScore,
+        summary: e.summary,
+        steps: e.steps,
+      };
+    });
+    const totalInf = realdbInf.concat(apiInf);
     const idRecipe = totalInf.filter((e) => e.id == id); // tengo que poner doble por que si es estricta como viene como string
     // no filtra correctamente
     console.log(idRecipe);

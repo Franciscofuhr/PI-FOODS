@@ -20,8 +20,6 @@ const Recipes = () => {
 
   const [recipeSearch, setRecipeSearch] = useState("");
 
-  const [ordered, setOrder] = useState("");
-
   let recipes = useSelector((state) => state.recipes);
 
   const [pageItems, setPageItems] = useState([]); //empieza con un estado inicial de un array vacio

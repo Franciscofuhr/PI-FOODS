@@ -13,19 +13,20 @@
 }
 .showdiets{
     
-    display: flex;
+    display: row;
     flex-wrap: wrap;
     justify-content: center;
+    padding: 30px 100px 30px 100px;
       
 }
 .cardscontainer{
-    display:row;
-    justify-content: center !important;
+    display:flex;
+    justify-content: space-between;
     align-items: center;
     padding: 15px ;
     margin: 15px;
-    width: 380px;
-    height: 350px;
+    width: 1100px;
+    height: 150px;
     border-radius: 30px;
     overflow: hidden;
     background-color: rgba(255, 255, 255, 0.65);
@@ -43,12 +44,17 @@
 
 .name{
     padding: 15px;
-    border: 1px solid rgb(252, 2, 218);
-    color:rgb(252, 2, 218);
+    width: 200px !important;
+    height: 70px;
+    text-align: center;
+    border: 1px solid rgb(33, 75, 30);
+    color:rgb(37, 131, 30);
     border-radius: 35px;
     display: flex;
     justify-content: center;
     align-items: center !important;
+    font-family: 'Arima', cursive;
+    font-weight: 600;
     
     
 
@@ -57,8 +63,9 @@
 .information{
     text-align: center;
     font-size: 15px;
-    margin-left: 20px;
-    font-family:monospace;
+    width: 900px;
+    font-family: 'Arima', cursive;
+    font-weight: 600;
 
 
 }
