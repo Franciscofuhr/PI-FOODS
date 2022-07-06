@@ -39,7 +39,7 @@ const CreateRecipe = () => {
     }
     if (
       property === "healthScore" &&
-      (value < 0 || value > 100 || !beNumber.test(value) || !value)
+      (value < 0 || value > 100 || !beNumber.test(value))
     ) {
       return (validations[property] =
         "The healthScore must be a number between 0 and 100");
@@ -211,7 +211,7 @@ const CreateRecipe = () => {
               : null}
           </div>
           <div>
-            {!errors.title && !errors.summary ? (
+            {!errors.title && !errors.summary && !errors.healthScore ? (
               <button type="submit" className={c.createbutton}>
                 CREATE
               </button>

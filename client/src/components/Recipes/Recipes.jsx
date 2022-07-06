@@ -91,6 +91,7 @@ const Recipes = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(getRecipeSearch(recipeSearch));
+    setRecipeSearch("");
   };
   const handleOnChange = (e) => {
     setRecipeSearch(e.target.value);

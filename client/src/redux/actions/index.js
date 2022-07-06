@@ -14,7 +14,7 @@ export const getRecipes = () => {
   return async function (dispatch) {
     console.log("entro a las actions");
     return axios
-      .get(`http://localhost:3001/recipes`) // busco en el back
+      .get(`/recipes`) // busco en el back
       .then((r) => {
         return r.data;
       })
@@ -41,7 +41,7 @@ export const getDietRecipes = (diet) => {
   return async function (dispatch) {
     console.log("entro a las actions");
     return axios
-      .get(`http://localhost:3001/recipes`) // busco en el back
+      .get(`/recipes`) // busco en el back
       .then((r) => {
         console.log(r.data, "pedido a el back");
         return r.data;
@@ -57,7 +57,7 @@ export const getRecipeDetail = (id) => {
   return async function (dispatch) {
     console.log("entro a la action de get recipes");
     return axios
-      .get(`http://localhost:3001/recipes/${id}`) //aca iria ruta del back
+      .get(`/recipes/${id}`) //aca iria ruta del back
       .then((r) => {
         console.log(r.data);
         return r.data;
@@ -71,9 +71,9 @@ export const getRecipeDetail = (id) => {
 };
 
 export const getRecipeSearch = (search) => {
-  return async function (dispatch) {
-    return axios
-      .get(`http://localhost:3001/recipes?name=${search}`)
+  return (dispatch) => {
+    axios
+      .get(`/recipes?name=${search}`)
       .then((res) => res.data)
       .then((res) => dispatch({ type: GET_RECIPES_SEARCH, payload: res }))
       .catch((e) => {
@@ -86,7 +86,7 @@ export const getRecipeSearch = (search) => {
 export const getDiets = () => {
   return async function (dispatch) {
     return axios
-      .get(`http://localhost:3001/diets`)
+      .get(`/diets`)
       .then((res) => dispatch({ type: GET_DIETS, payload: res.data }))
       .catch((e) => {
         console.log("error buscando las dietas");
@@ -98,7 +98,7 @@ export const getDiets = () => {
 export const addRecipe = (body) => {
   return async function (dispatch) {
     return axios
-      .post(`http://localhost:3001/recipes`, body)
+      .post(`/recipes`, body)
       .then((res) => dispatch({ type: ADD_RECIPE, payload: res }));
   };
 };
