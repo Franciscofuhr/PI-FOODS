@@ -60,6 +60,8 @@ const rootReducer = (state = initialState, action) => {
     case GET_DIET_RECIPES:
       let dietRecipes = action.payload;
       let typeDiet = action.filter.toLowerCase();
+      console.log(typeDiet);
+
       return {
         ...state,
         recipes: dietRecipes.filter((e) => e.diet.includes(typeDiet)),

@@ -7,7 +7,7 @@ import {
   getRecipesOrderAlphabetical,
   getRecipesOrderScore,
 } from "../../redux/actions";
-import { connect, useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import RecipesCard from "../RecipesCard/RecipesCard";
 import c from "./Recipes.module.css";
 
@@ -70,7 +70,6 @@ const Recipes = () => {
   };
 
   const OrderAlphabetical = (e) => {
-    console.log("entra a Order Alphabetical");
     dispatch(getRecipesOrderAlphabetical(e.target.value)); //me va a dar 1 o -1
     setCurrentPage(1);
     setPageItems(recipes.slice(0, ITEMS_PER_PAGE));
@@ -92,7 +91,6 @@ const Recipes = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(getRecipeSearch(recipeSearch));
-    console.log("entra en el submit");
   };
   const handleOnChange = (e) => {
     setRecipeSearch(e.target.value);

@@ -23,7 +23,7 @@
     margin: 25px 30px 25px 30px;
     height: 50px;
     width: 100px;
-    margin-left: 150px;
+    margin-left: 75px;
     margin-right: 8px;
     padding: 0px ;
     
@@ -45,6 +45,22 @@
     transition: color 500ms ease;
 }
 
+.linksland{
+    text-decoration: none;
+    color: rgb(13, 58, 27);
+    font-family: 'Arima', cursive;
+    font-weight: 800;
+    font-size: 35px;
+    margin: 25px 30px 25px 10px;
+    height: 50px;
+    width: 100px;
+    margin-left: 20px;
+    margin-right: 8px;
+    padding: 0px ;
+    
+    transition: color 500ms ease;
+
+}
 
 .links:hover{
     color: aliceblue;
@@ -52,5 +68,10 @@
 .linksdietcreat:hover{
     color: aliceblue;
 }
+
+.linksland:hover{
+    color: rgb(179, 255, 173);
+}
+
 
 

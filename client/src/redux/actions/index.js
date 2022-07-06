@@ -10,11 +10,6 @@ export const GET_RECIPES_SEARCH = "GET_RECIPES_SEARCH";
 export const ADD_RECIPE = "ADD_RECIPE";
 export const GET_DIET_RECIPES = "GET_DIET_RECIPES";
 
-const apiKey = "0c3461e7cf7c436f9c8f1615d6433998";
-//"ae67ad501e6942dfb88ac8cdce7089bd"; // guardar en variable de entorno
-//"261e6769e47344e493eca2ed9d45013e"; //
-// ailu apikey "b12256479e1143308220e14ed0f40900"
-//nehuen apikey "0c3461e7cf7c436f9c8f1615d6433998"
 export const getRecipes = () => {
   return async function (dispatch) {
     console.log("entro a las actions");
@@ -32,7 +27,6 @@ export const getRecipes = () => {
 
 export const getRecipesOrderAlphabetical = (number) => {
   // en caso de que me llegue 1 por parametro ordena de A-Z Y sino alrevez
-  console.log("entra a las actions order alpha");
   return {
     type: GET_RECIPES_ORDER_ALPHABETICAL,
     payload: number,
@@ -49,6 +43,7 @@ export const getDietRecipes = (diet) => {
     return axios
       .get(`http://localhost:3001/recipes`) // busco en el back
       .then((r) => {
+        console.log(r.data, "pedido a el back");
         return r.data;
       })
       .then((d) => {

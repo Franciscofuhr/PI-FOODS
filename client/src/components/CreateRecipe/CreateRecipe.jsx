@@ -82,7 +82,6 @@ const CreateRecipe = () => {
     e.preventDefault();
     dispatch(addRecipe(newRecipe)); //crear reducer que cree una receta en actions
     console.log(newRecipe);
-    alert("You created a recipe!");
     setNewRecipe({
       title: "",
       diet: [],
@@ -91,6 +90,8 @@ const CreateRecipe = () => {
       summary: "",
       steps: "",
     });
+    alert("You created a recipe!");
+    window.location.href = "/recipes";
   };
 
   const handleCheck = (e) => {

@@ -1,7 +1,6 @@
-import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { getRecipes, getRecipeSearch } from "../../redux/actions";
+import { getRecipes } from "../../redux/actions";
 import c from "./NavBar.module.css";
 
 const NavBar = () => {
@@ -13,6 +12,10 @@ const NavBar = () => {
   return (
     <div className={c.nav}>
       <div className={c.home}>
+        <Link to="/" className={c.linksland}>
+          {" "}
+          Healthier{" "}
+        </Link>
         <Link
           id="Home"
           className={c.links}

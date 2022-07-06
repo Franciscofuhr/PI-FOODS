@@ -5,6 +5,9 @@ import c from "./Diets.module.css";
 
 const Diets = () => {
   const dispatch = useDispatch();
+  function firstLetterCapitalize(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
   let diets = useSelector((state) => state.diets);
   useEffect(() => {
     dispatch(getDiets());
@@ -16,7 +19,7 @@ const Diets = () => {
           ? diets.map((diet) => {
               return (
                 <div key={diet.name} className={c.cardscontainer}>
-                  <h2 className={c.name}>{diet.name}</h2>
+                  <h2 className={c.name}>{firstLetterCapitalize(diet.name)}</h2>
                   <h6 className={c.information}>{diet.information}</h6>
                 </div>
               );

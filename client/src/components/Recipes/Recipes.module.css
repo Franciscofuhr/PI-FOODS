@@ -42,6 +42,7 @@
     color: black;
     font-family: 'Arima', cursive;
     font-weight: 700;
+    margin:0px
     
 }
 
@@ -55,6 +56,9 @@
     justify-content: center;
     align-items: center;
     border: 0px;
+    cursor: pointer;
+
+    
 
     
 }
@@ -79,12 +83,15 @@ select{
     border: 3px solid rgba(0, 0, 0, 0.7);
     border-radius: 20px;
     background-color: rgba(255, 253, 253, 0.65);
+    
+
 }
 .orderby{
     font-family: 'Arima', cursive;
     font-weight: 800;
     padding: 0;
-    margin:0
+    margin:0;
+    
 }
 
 .pagenumbers{
@@ -104,6 +111,7 @@ select{
     font-family: 'Arima', cursive;
     font-weight: 600;
     font-size: 17px;
+    cursor: pointer;
 }
 
 .current{
@@ -119,4 +127,7 @@ select{
     font-family: 'Arima', cursive;
     font-weight: 600;
     font-size: 17px;
+}
+.option{
+    cursor: pointer;
 }
