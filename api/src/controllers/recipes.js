@@ -4,6 +4,7 @@ const axios = require("axios");
 const { Op } = require("sequelize");
 const db = require("../db.js");
 const API_KEY = "d413740024684c3ea2f0c267b5f29ec8";
+
 // para presentar : 0c3461e7cf7c436f9c8f1615d6433998
 //b12256479e1143308220e14ed0f40900
 //c437c991033243b59e8e402cc7ffda84
